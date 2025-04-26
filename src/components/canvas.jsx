@@ -212,17 +212,18 @@ export default function canvas() {
   };
   
   return (
-<div style={{ position: "relative", height: "100vh", width: "100vw" }}>
+<div style={{ position: "relative", height: "100vh", width: "100%" }}>
     {/* Floating Buttons */}
     <div style={{
       position: "absolute",
-      top: 20,
-      left: 20,
+      bottom: 20,
+      right: 20,
       zIndex: 10,
       display: "flex",
+      alignItems: "flex-start",
       flexDirection: "column",
       gap: "10px",
-      background: "rgba(255,255,255,0.8)",
+      background: "rgba(0,0,0,0.34)",
       padding: "10px",
       borderRadius: "8px"
     }}>

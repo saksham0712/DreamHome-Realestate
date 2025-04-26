@@ -1,6 +1,8 @@
 // The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work.
 import React, { useState, useRef, useEffect } from 'react';
 import V6 from './V6';
+import Canvas from './canvas';
+
 const App: React.FC = () => {
     const [activeSlide, setActiveSlide] = useState(0);
     const [isDrawing, setIsDrawing] = useState(false);
@@ -27,6 +29,12 @@ const App: React.FC = () => {
             title: "Premium Properties",
             subtitle: "Curated selection of the world's finest real estate",
             image: "https://readdy.ai/api/search-image?query=elegant%20mansion%20with%20dramatic%20lighting%2C%20modern%20luxury%20architecture%2C%20water%20features%2C%20professional%20twilight%20photography%2C%20high%20contrast%2C%20empty%20courtyard%2C%20sophisticated%20landscaping%2C%20high-end%20real%20estate%2C%20cinematic%20composition&width=1440&height=600&seq=9&orientation=landscape"
+        },
+        {
+            id: 4,
+            title: "Premium Properties",
+            subtitle: "Curated selection of the world's finest real estate",
+            image: "https://readdy.ai/api/search-image?query=luxurious%20modern%20mansion%20with%20infinity%20pool%20at%20night%2C%20dramatic%20lighting%2C%20sleek%20architecture%2C%20minimalist%20design%2C%20dark%20moody%20atmosphere%2C%20high-end%20real%20estate%20photography%2C%20ultra-wide%20angle%2C%20professional%20lighting%2C%20deep%20shadows%2C%20reflective%20surfaces&width=1920&height=1080&seq=1&orientation=landscape"
         }
     ];
     // Slider controls
@@ -40,7 +48,7 @@ const App: React.FC = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             nextSlide();
-        }, 5000);
+        }, 3000);
         return () => clearInterval(interval);
     }, []);
     return (
@@ -63,13 +71,13 @@ const App: React.FC = () => {
                         <div className="absolute inset-0 z-20 flex items-center">
                             <div className="container mx-auto px-6">
                                 <div className="max-w-xl">
-                                    <h2 className="text-6xl font-light mb-6 leading-tight tracking-wide">{slide.title}</h2>
-                                    <p className="text-2xl text-gray-200 mb-10 font-light">{slide.subtitle}</p>
+                                    <h2 className="text-4xl md:text-6xl font-light mb-6 leading-tight tracking-wide">{slide.title}</h2>
+                                    <p className="text-xl md:text-2xl text-gray-200 mb-10 font-light">{slide.subtitle}</p>
                                     <div className="flex space-x-6">
-                                        <button className="bg-[#1A237E] hover:bg-[#0D47A1] text-white px-8 py-4 text-lg transition-colors duration-300 cursor-pointer !rounded-button whitespace-nowrap">
+                                        <button className="bg-[#1A237E] hover:bg-[#0D47A1] text-white px-4 md:px-8 py-2 md:py-4 text-base md:text-lg transition-colors duration-300 cursor-pointer !rounded-button whitespace-nowrap">
                                             Explore Properties
                                         </button>
-                                        <button className="bg-transparent border-2 border-white hover:bg-white hover:text-[#1A1A1A] text-white px-8 py-4 text-lg transition-colors duration-300 cursor-pointer !rounded-button whitespace-nowrap">
+                                        <button className="bg-transparent border-2 border-white hover:bg-white hover:text-[#1A1A1A] text-white px-4 md:px-8 py-2 md:py-4 text-base md:text-lg transition-colors duration-300 cursor-pointer !rounded-button whitespace-nowrap">
                                             Design Your Home
                                         </button>
                                     </div>
@@ -81,15 +89,21 @@ const App: React.FC = () => {
                 {/* Slider controls */}
                 <button
                     onClick={prevSlide}
-                    className="absolute left-8 top-1/2 -translate-y-1/2 z-30 bg-black/30 hover:bg-[#1A237E] w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer !rounded-button whitespace-nowrap hover:scale-110"
+                    className="absolute left-8 top-1/2 -translate-y-1/2 z-30 bg-black/30 hover:bg-[#1A237E] opacity-0 md:opacity-100 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer !rounded-button whitespace-nowrap hover:scale-110"
                 >
-                    <i className="fa fa-chevron-left text-xl"></i>
+                    {/* <i className="fa fa-chevron-left text-xl"></i> */}
+                    <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13" />
+                    </svg>
                 </button>
                 <button
                     onClick={nextSlide}
-                    className="absolute right-8 top-1/2 -translate-y-1/2 z-30 bg-black/30 hover:bg-[#1A237E] w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer !rounded-button whitespace-nowrap hover:scale-110"
+                    className="absolute right-8 top-1/2 -translate-y-1/2 z-30 bg-black/30 hover:bg-[#1A237E] opacity-0 md:opacity-100 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer !rounded-button whitespace-nowrap hover:scale-110"
                 >
-                    <i className="fa fa-chevron-right text-xl"></i>
+                    {/* <i className="fa fa-chevron-right text-xl"></i> */}
+                    <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1" />
+                    </svg>
                 </button>
                 {/* Slider indicators */}
                 <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex space-x-3">
@@ -97,7 +111,7 @@ const App: React.FC = () => {
                         <button
                             key={index}
                             onClick={() => setActiveSlide(index)}
-                            className={`w-4 h-4 rounded-full transition-all duration-300 cursor-pointer !rounded-button whitespace-nowrap ${index === activeSlide ? 'bg-[#1A237E] scale-125' : 'bg-white/50 hover:bg-white'
+                            className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer !rounded-button whitespace-nowrap ${index === activeSlide ? 'bg-[#1A237E] scale-100' : 'bg-white/50 hover:bg-white'
                                 }`}
                         ></button>
                     ))}
@@ -115,7 +129,7 @@ const App: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                         {/* Tools Panel */}
-                        <div className="lg:col-span-2 bg-[#1A1A1A] p-4 rounded-lg">
+                        {/* <div className="lg:col-span-2 bg-[#1A1A1A] p-4 rounded-lg">
                             <h3 className="text-xl mb-4 font-light">Design Tools</h3>
                             <div className="space-y-3">
                                 {[
@@ -137,21 +151,6 @@ const App: React.FC = () => {
                                     </button>
                                 ))}
                             </div>
-                            <h3 className="text-xl mt-6 mb-4 font-light">Color Palette</h3>
-                            <div className="grid grid-cols-5 gap-2">
-                                {[
-                                    '#ffffff', '#cccccc', '#999999', '#666666', '#333333',
-                                    '#1A237E', '#0D47A1', '#01579B', '#006064', '#004D40'
-                                ].map((color, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => setSelectedColor(color)}
-                                        className={`w-8 h-8 rounded-full cursor-pointer !rounded-button whitespace-nowrap ${selectedColor === color ? 'ring-2 ring-white' : ''
-                                            }`}
-                                        style={{ backgroundColor: color }}
-                                    ></button>
-                                ))}
-                            </div>
                             <div className="mt-6 space-y-2">
                                 <button className="w-full bg-[#333333] hover:bg-[#444444] text-white py-2 px-4 rounded transition-colors duration-300 cursor-pointer !rounded-button whitespace-nowrap">
                                     Clear Canvas
@@ -160,49 +159,14 @@ const App: React.FC = () => {
                                     Save Design
                                 </button>
                             </div>
-                        </div>
+                        </div> */}
                         {/* Canvas Area */}
-                        <div className="lg:col-span-7 bg-[#212121] rounded-lg overflow-hidden">
-                            <canvas
-                                ref={canvasRef}
-                                className="w-full h-[500px]"
-                                onMouseDown={(e) => {
-                                    if (!context) return;
-                                    setIsDrawing(true);
-                                    const rect = canvasRef.current?.getBoundingClientRect();
-                                    if (!rect) return;
-                                    const x = e.clientX - rect.left;
-                                    const y = e.clientY - rect.top;
-                                    context.beginPath();
-                                    context.moveTo(x, y);
-                                    context.strokeStyle = selectedColor;
-                                    context.lineWidth = 2;
-                                }}
-                                onMouseMove={(e) => {
-                                    if (!isDrawing || !context) return;
-                                    const rect = canvasRef.current?.getBoundingClientRect();
-                                    if (!rect) return;
-                                    const x = e.clientX - rect.left;
-                                    const y = e.clientY - rect.top;
-                                    context.lineTo(x, y);
-                                    context.stroke();
-                                }}
-                                onMouseUp={() => {
-                                    if (context) {
-                                        context.closePath();
-                                    }
-                                    setIsDrawing(false);
-                                }}
-                                onMouseLeave={() => {
-                                    if (context) {
-                                        context.closePath();
-                                    }
-                                    setIsDrawing(false);
-                                }}
-                            ></canvas>
+                        <div className="lg:col-span-12 bg-[#21212100] rounded-lg overflow-y-hidden">
+
+                            <Canvas />
                         </div>
                         {/* Property Details Panel */}
-                        <div className="lg:col-span-3 bg-[#1A1A1A] p-4 rounded-lg">
+                        {/* <div className="lg:col-span-3 bg-[#1A1A1A] p-4 rounded-lg">
                             <h3 className="text-xl mb-4 font-light">Property Details</h3>
                             <div className="space-y-4">
                                 <div>
@@ -273,93 +237,13 @@ const App: React.FC = () => {
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section>
 
-<V6 />
+            <V6 />
 
-            {/* Footer */}
-            <footer className="bg-gradient-to-r from-[#1A1A1A] to-[#1A237E] py-12">
-                <div className="container mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div>
-                            <h3 className="text-2xl font-light mb-4">DREAM<span className="text-white font-bold">HOME</span></h3>
-                            <p className="text-gray-300 mb-4">
-                                Redefining luxury real estate with innovative design tools and premium property listings.
-                            </p>
-                            <div className="flex space-x-4">
-                                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer">
-                                    <i className="fa fa-facebook"></i>
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer">
-                                    <i className="fa fa-twitter"></i>
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer">
-                                    <i className="fa fa-instagram"></i>
-                                </a>
-                                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer">
-                                    <i className="fa fa-linkedin"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 className="text-lg font-medium mb-4">Quick Links</h4>
-                            <ul className="space-y-2">
-                                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer">Home</a></li>
-                                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer">Properties</a></li>
-                                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer">Design Studio</a></li>
-                                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer">About Us</a></li>
-                                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-300 cursor-pointer">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="text-lg font-medium mb-4">Contact Us</h4>
-                            <ul className="space-y-2">
-                                <li className="flex items-start">
-                                    <i className="fa fa-map-marker mt-1 mr-3 text-[#1A237E]"></i>
-                                    <span className="text-gray-300">123 Luxury Lane, New York, NY 10001</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <i className="fa fa-phone mr-3 text-[#1A237E]"></i>
-                                    <span className="text-gray-300">+1 (212) 555-1234</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <i className="fa fa-envelope mr-3 text-[#1A237E]"></i>
-                                    <span className="text-gray-300">info@dreamhome.com</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="text-lg font-medium mb-4">Newsletter</h4>
-                            <p className="text-gray-300 mb-4">Subscribe to our newsletter for the latest property listings and design tips.</p>
-                            <form className="flex">
-                                <input
-                                    type="email"
-                                    placeholder="Your email"
-                                    className="bg-white/10 border-none text-white py-2 px-3 rounded-l focus:outline-none focus:ring-1 focus:ring-[#1A237E] w-full"
-                                />
-                                <button className="bg-[#1A237E] hover:bg-[#0D47A1] text-white py-2 px-4 rounded-r transition-colors duration-300 cursor-pointer !rounded-button whitespace-nowrap">
-                                    <i className="fa fa-paper-plane"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                        <p className="text-gray-400 text-sm">© 2025 DREAMHOME. All rights reserved.</p>
-                        <div className="flex items-center space-x-4 mt-4 md:mt-0">
-                            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-300 cursor-pointer">Privacy Policy</a>
-                            <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-300 cursor-pointer">Terms of Service</a>
-                            <div className="flex items-center space-x-2">
-                                <i className="fa fa-cc-visa text-gray-300 text-xl"></i>
-                                <i className="fa fa-cc-mastercard text-gray-300 text-xl"></i>
-                                <i className="fa fa-cc-paypal text-gray-300 text-xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
     );
 };
